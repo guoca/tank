@@ -13,6 +13,7 @@ public class TankFrame extends Frame {
     Tank mainTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
     List<Tank> tList = new ArrayList<>();
     List<Bullet> bList = new ArrayList<>();
+    List<Expolde> eList = new ArrayList<>();
 
     public TankFrame() {
         setTitle("tank war");
@@ -60,10 +61,8 @@ public class TankFrame extends Frame {
         for (int i = 0; i < tList.size(); i++) {
             tList.get(i).paint(g);
         }
-        for (Tank t : tList) {
-            for (Bullet b : bList) {
-                b.collideWith(t);
-            }
+        for (int i = 0; i < eList.size(); i++) {
+            eList.get(i).paint(g);
         }
         for (int i = 0; i < bList.size(); i++) {
             Bullet b = bList.get(i);
@@ -71,6 +70,7 @@ public class TankFrame extends Frame {
                 b.collideWith(tList.get(j));
             }
         }
+
 
 
     }
