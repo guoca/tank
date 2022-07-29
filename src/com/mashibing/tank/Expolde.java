@@ -13,6 +13,7 @@ public class Expolde {
         this.x = x;
         this.y = y;
         this.tf = tf;
+        new Thread(()->new Audio("audio/explode.wav").play()).start();
     }
 
     public void paint(Graphics g) {
