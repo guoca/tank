@@ -2,56 +2,59 @@
 package com.mashibing.tank;
 
 import java.io.IOException;
-import java.net.URL;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
-import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.SourceDataLine;
 
+/**
+ * 音频对象
+ */
 public class Audio {
 
-    byte[] b = new byte[1024 * 1024 * 15];
+    private static final int BUFFER_SIZE = 1024 * 1024 * 15;
+    private static final byte[] BUFFER_BYTE_ARR = new byte[BUFFER_SIZE];
+    private static final int READ_LIMIT = Integer.MAX_VALUE;
+
+    private AudioInputStream audioInputStream = null;
+    private AudioFormat audioFormat = null;
+    private SourceDataLine sourceDataLine = null;
+    private DataLine.Info dataLine_info = null;
 
 
+
+
+    /**
+     * 循环播放
+     */
     public void loop() {
         try {
-
             while (true) {
-                int len = 0;
-                sourceDataLine.open(audioFormat, 1024 * 1024 * 15);
-                sourceDataLine.start();
-                //System.out.println(audioInputStream.markSupported());
-                audioInputStream.mark(12358946);
-                while ((len = audioInputStream.read(b)) > 0) {
-                    sourceDataLine.write(b, 0, len);
-                }
-                audioInputStream.reset();
-
-                sourceDataLine.drain();
-                sourceDataLine.close();
+                play();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private AudioFormat audioFormat = null;
-    private SourceDataLine sourceDataLine = null;
-    private DataLine.Info dataLine_info = null;
 
-    private AudioInputStream audioInputStream = null;
-
+    /**
+     * 根据文件路名构建音频对象
+     * @param fileName
+     */
     public Audio(String fileName) {
         try {
-            URL resource = Audio.class.getClassLoader().getResource(fileName);
-            audioInputStream = AudioSystem.getAudioInputStream(resource);
+            //获取音频输入流
+            audioInputStream = AudioSystem.getAudioInputStream(Audio.class.getClassLoader().getResource(fileName));
+            System.out.println("测试此音频输入流是否支持 mark 和 reset 方法："+audioInputStream.markSupported());
+            //获取音频流的格式
             audioFormat = audioInputStream.getFormat();
+
             dataLine_info = new DataLine.Info(SourceDataLine.class, audioFormat);
             sourceDataLine = (SourceDataLine) AudioSystem.getLine(dataLine_info);
+            // 音量控制
             //FloatControl volctrl=(FloatControl)sourceDataLine.getControl(FloatControl.Type.MASTER_GAIN);
             //volctrl.setValue(-40);//
 
@@ -62,16 +65,15 @@ public class Audio {
 
     public void play() {
         try {
-            byte[] b = new byte[1024*5];
             int len = 0;
-            sourceDataLine.open(audioFormat, 1024*5);
+            sourceDataLine.open(audioFormat, BUFFER_SIZE);
             sourceDataLine.start();
-            //System.out.println(audioInputStream.markSupported());
-            audioInputStream.mark(12358946);
-            while ((len = audioInputStream.read(b)) > 0) {
-                sourceDataLine.write(b, 0, len);
+
+            audioInputStream.mark(READ_LIMIT);
+            while ((len = audioInputStream.read(BUFFER_BYTE_ARR)) > 0) {
+                sourceDataLine.write(BUFFER_BYTE_ARR, 0, len);
             }
-            // audioInputStream.reset();
+            audioInputStream.reset();
 
             sourceDataLine.drain();
             sourceDataLine.close();
@@ -80,7 +82,6 @@ public class Audio {
             e.printStackTrace();
         }
     }
-
 
 
     public void close() {
@@ -92,9 +93,9 @@ public class Audio {
     }
 
     public static void main(String[] args) {
-//        Audio a = new Audio("audio/explode.wav");
-		Audio a = new Audio("audio/war1.wav");
-        a.loop();
+        Audio a = new Audio("audio/explode.wav");
+//        Audio a = new Audio("audio/war1.wav");
+        a.play();
 
     }
 
