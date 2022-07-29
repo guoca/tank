@@ -11,17 +11,16 @@ public class ResMgr {
 
     static {
         try {
-            tankL = ImageIO.read(ResMgr.class.getClassLoader().getResourceAsStream("images/tankL.gif"));
-            tankR = ImageIO.read(ResMgr.class.getClassLoader().getResourceAsStream("images/tankR.gif"));
-            tankU = ImageIO.read(ResMgr.class.getClassLoader().getResourceAsStream("images/tankU.gif"));
-            tankD = ImageIO.read(ResMgr.class.getClassLoader().getResourceAsStream("images/tankD.gif"));
-            bulletL = ImageIO.read(ResMgr.class.getClassLoader().getResourceAsStream("images/bulletL.gif"));
-            bulletR = ImageIO.read(ResMgr.class.getClassLoader().getResourceAsStream("images/bulletR.gif"));
+            tankU = ImageIO.read(ResMgr.class.getClassLoader().getResourceAsStream("images/BadTank1.png"));
+            tankL = ImgUtil.rotateImg(tankU, -90);
+            tankR = ImgUtil.rotateImg(tankU, 90);
+            tankD = ImgUtil.rotateImg(tankU, 180);
             bulletU = ImageIO.read(ResMgr.class.getClassLoader().getResourceAsStream("images/bulletU.gif"));
-            bulletD = ImageIO.read(ResMgr.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
+            bulletL = ImgUtil.rotateImg(bulletU, -90);
+            bulletR = ImgUtil.rotateImg(bulletU, 90);
+            bulletD = ImgUtil.rotateImg(bulletU, 180);
             for (int i = 0; i < 16; i++) {
                 explodeArr[i] = ImageIO.read(ResMgr.class.getClassLoader().getResourceAsStream("images/e" + (i + 1) + ".gif"));
-
             }
         } catch (IOException e) {
             e.printStackTrace();
