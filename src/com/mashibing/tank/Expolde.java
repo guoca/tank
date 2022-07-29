@@ -13,6 +13,7 @@ public class Expolde {
         this.x = x;
         this.y = y;
         this.tf = tf;
+        //爆炸音效
         new Thread(()->new Audio("audio/explode.wav").play()).start();
     }
 

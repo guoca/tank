@@ -1,14 +1,15 @@
 package com.mashibing.tank;
 
 import java.awt.*;
-import java.rmi.Remote;
+import java.util.Random;
 
 public class Tank {
     private int x = 200, y = 200;
     private Dir dir = Dir.DOWN;
-    private static final int SPEED = 10;
+    private static final int SPEED = 3;
     public static final int WIDTH = ResMgr.tankD.getWidth();
     public static final int HEIGHT = ResMgr.tankD.getHeight();
+    public static final Random RANDOM = new Random();
 
     private boolean living = true;
     private boolean moving = false;
@@ -103,7 +104,7 @@ public class Tank {
     }
 
     private void move() {
-        if (!isMoving()) {
+        if (!isMoving() && group == Group.GOOD) {
             return;
         }
         switch (dir) {
@@ -122,6 +123,14 @@ public class Tank {
             default:
                 break;
         }
+        if (this.group == Group.BAD && RANDOM.nextInt(100) > 95) fire();
+        if (this.group == Group.BAD && RANDOM.nextInt(100) > 95) randomDir();
+
+
+    }
+
+    private void randomDir() {
+        this.dir = Dir.values()[RANDOM.nextInt(4)];
     }
 
     public void die() {

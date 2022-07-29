@@ -1,13 +1,8 @@
 
 package com.mashibing.tank;
 
+import javax.sound.sampled.*;
 import java.io.IOException;
-
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.SourceDataLine;
 
 /**
  * 音频对象
@@ -48,7 +43,7 @@ public class Audio {
         try {
             //获取音频输入流
             audioInputStream = AudioSystem.getAudioInputStream(Audio.class.getClassLoader().getResource(fileName));
-            System.out.println("测试此音频输入流是否支持 mark 和 reset 方法："+audioInputStream.markSupported());
+//            System.out.println("测试此音频输入流是否支持 mark 和 reset 方法："+audioInputStream.markSupported());
             //获取音频流的格式
             audioFormat = audioInputStream.getFormat();
 
