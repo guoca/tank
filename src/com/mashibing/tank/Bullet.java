@@ -73,7 +73,9 @@ public class Bullet {
         if (this.getRect().intersects(t.getRect())) {
             t.die();
             this.die();
-            tf.eList.add(new Expolde(x-Expolde.WIDTH/2,y-Expolde.HEIGHT/2,tf));
+            int eX = t.getX() + Tank.WIDTH / 2 - Expolde.WIDTH / 2;
+            int eY = t.getY() + Tank.HEIGHT / 2 - Expolde.HEIGHT / 2;
+            tf.eList.add(new Expolde(eX, eY, tf));
         }
     }
 
