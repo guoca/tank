@@ -1,10 +1,17 @@
-package com.mashibing.tank;
+package com.mashibing.tank.singleton;
+
+import com.mashibing.tank.util.ImgUtil;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+/**
+ * 资源管理类
+ */
 public class ResMgr {
+    private ResMgr() {
+    }
 
     public static BufferedImage gTankL, gTankR, gTankU, gTankD;
     public static BufferedImage bTankL, bTankR, bTankU, bTankD;

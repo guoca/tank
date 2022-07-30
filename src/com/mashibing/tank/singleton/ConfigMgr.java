@@ -1,4 +1,4 @@
-package com.mashibing.tank;
+package com.mashibing.tank.singleton;
 
 
 import java.io.IOException;
@@ -7,26 +7,26 @@ import java.util.Properties;
 /**
  * 配置管理类
  */
-public class PropMgr {
+public class ConfigMgr {
 
     private static Properties pro = new Properties();
 
-    private PropMgr() {
+    private ConfigMgr() {
     }
 
-    private static PropMgr propMgr = new PropMgr();
+    private static ConfigMgr configMgr = new ConfigMgr();
 
     static {
         try {
-            pro.load(PropMgr.class.getClassLoader().getResourceAsStream("config/config.properties"));
+            pro.load(ConfigMgr.class.getClassLoader().getResourceAsStream("config/config.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
 
-    public static PropMgr getInstance() {
-        return propMgr;
+    public static ConfigMgr getInstance() {
+        return configMgr;
     }
 
     public String getStr(String key) {

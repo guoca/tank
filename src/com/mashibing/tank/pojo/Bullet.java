@@ -1,8 +1,16 @@
-package com.mashibing.tank;
+package com.mashibing.tank.pojo;
+
+import com.mashibing.tank.*;
+import com.mashibing.tank.enums.Dir;
+import com.mashibing.tank.enums.Group;
+import com.mashibing.tank.pojo.base.BaseBullet;
+import com.mashibing.tank.pojo.base.BaseTank;
+import com.mashibing.tank.singleton.GlobalConfig;
+import com.mashibing.tank.singleton.ResMgr;
 
 import java.awt.*;
 
-public class Bullet {
+public class Bullet extends BaseBullet {
     private static final int SPEED = GlobalConfig.BULLET_SPEED;
     public static final int WIDTH = ResMgr.bulletD.getWidth();
     public static final int HEIGHT = ResMgr.bulletD.getHeight();
@@ -19,12 +27,12 @@ public class Bullet {
         this.dir = dir;
         this.tf = tf;
         this.group = group;
-        tf.bList.add(this);
+        tf.getbList().add(this);
     }
 
     public void paint(Graphics g) {
         if (!living) {
-            tf.bList.remove(this);
+            tf.getbList().remove(this);
         }
         switch (dir) {
             case LEFT:
@@ -75,14 +83,14 @@ public class Bullet {
      *
      * @param t
      */
-    public void collideWith(Tank t) {
+    public void collideWith(BaseTank t) {
         if (this.group == t.getGroup()) return;
         if (this.getRect().intersects(t.getRect())) {
             t.die();
             this.die();
             int eX = t.getX() + Tank.WIDTH / 2 - Expolde.WIDTH / 2;
             int eY = t.getY() + Tank.HEIGHT / 2 - Expolde.HEIGHT / 2;
-            tf.eList.add(new Expolde(eX, eY, tf));
+            tf.geteList().add(tf.getGf().createExpolde(eX, eY, tf));
         }
     }
 

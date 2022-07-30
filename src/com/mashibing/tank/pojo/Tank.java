@@ -1,28 +1,22 @@
-package com.mashibing.tank;
+package com.mashibing.tank.pojo;
+
+import com.mashibing.tank.*;
+import com.mashibing.tank.enums.Dir;
+import com.mashibing.tank.enums.Group;
+import com.mashibing.tank.pojo.base.BaseTank;
+import com.mashibing.tank.singleton.GlobalConfig;
+import com.mashibing.tank.singleton.ResMgr;
+import com.mashibing.tank.strategy.FireStrategy;
 
 import java.awt.*;
-import java.util.Random;
 
-public class Tank {
-    private int x = 200, y = 200;
-    private Dir dir = Dir.DOWN;
-    private static final int SPEED = GlobalConfig.TANK_SPEED;
-    public static final int WIDTH = ResMgr.bTankD.getWidth();
-    public static final int HEIGHT = ResMgr.bTankD.getHeight();
-    public static final Random RANDOM = new Random();
-
-    private boolean living = true;
-    private boolean moving = false;
-    private Group group = Group.BAD;
-    private TankFrame tf = null;
-    private Rectangle rect = new Rectangle(x, y, WIDTH, HEIGHT);
-    private FireStrategy fs;
+public class Tank extends BaseTank {
 
 
     public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
-        this.dir = dir;
+        super.dir = dir;
         this.tf = tf;
         this.group = group;
         String fsName = GlobalConfig.BAD_TANK_FIRE_STRATEGY;
@@ -41,60 +35,9 @@ public class Tank {
 
     }
 
-    public Group getGroup() {
-        return group;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public Dir getDir() {
-        return dir;
-    }
-
-    public void setDir(Dir dir) {
-        this.dir = dir;
-    }
-
-    public TankFrame getTf() {
-        return tf;
-    }
-
-    public void setTf(TankFrame tf) {
-        this.tf = tf;
-    }
-
-    public void setRect(Rectangle rect) {
-        this.rect = rect;
-    }
-
-    public boolean isMoving() {
-        return moving;
-    }
-
-    public void setMoving(boolean moving) {
-        this.moving = moving;
-    }
 
     public void paint(Graphics g) {
-        if (!living) tf.tList.remove(this);
+        if (!living) tf.gettList().remove(this);
         switch (dir) {
             case LEFT:
                 g.drawImage(this.group == Group.BAD ? ResMgr.bTankL : ResMgr.gTankL, x, y, null);
@@ -115,21 +58,6 @@ public class Tank {
         move();
     }
 
-    /**
-     * 开火
-     */
-    public void fire() {
-        fs.fire(this);
-    }
-
-    /**
-     * 获取坦克坐标
-     *
-     * @return
-     */
-    public Rectangle getRect() {
-        return this.rect;
-    }
 
     private void move() {
         if (!isMoving() && group == Group.GOOD) {
@@ -200,7 +128,4 @@ public class Tank {
         this.dir = Dir.values()[i];
     }
 
-    public void die() {
-        this.living = false;
-    }
 }

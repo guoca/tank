@@ -1,5 +1,5 @@
 
-package com.mashibing.tank;
+package com.mashibing.tank.util;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.io.IOException;
 /**
  * 音频对象
  */
-public class Audio {
+public class AudioUtil {
 
     private static final int BUFFER_SIZE = 1024 * 1024 * 15;
     private static final byte[] BUFFER_BYTE_ARR = new byte[BUFFER_SIZE];
@@ -39,10 +39,10 @@ public class Audio {
      * 根据文件路名构建音频对象
      * @param fileName
      */
-    public Audio(String fileName) {
+    public AudioUtil(String fileName) {
         try {
             //获取音频输入流
-            audioInputStream = AudioSystem.getAudioInputStream(Audio.class.getClassLoader().getResource(fileName));
+            audioInputStream = AudioSystem.getAudioInputStream(AudioUtil.class.getClassLoader().getResource(fileName));
 //            System.out.println("测试此音频输入流是否支持 mark 和 reset 方法："+audioInputStream.markSupported());
             //获取音频流的格式
             audioFormat = audioInputStream.getFormat();
@@ -88,7 +88,7 @@ public class Audio {
     }
 
     public static void main(String[] args) {
-        Audio a = new Audio("audio/explode.wav");
+        AudioUtil a = new AudioUtil("audio/explode.wav");
 //        Audio a = new Audio("audio/war1.wav");
         a.play();
 

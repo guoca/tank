@@ -1,5 +1,13 @@
 package com.mashibing.tank;
 
+import com.mashibing.tank.enums.Dir;
+import com.mashibing.tank.enums.Group;
+import com.mashibing.tank.factory.GameFactory;
+import com.mashibing.tank.pojo.base.BaseBullet;
+import com.mashibing.tank.pojo.base.BaseExpolde;
+import com.mashibing.tank.pojo.base.BaseTank;
+import com.mashibing.tank.singleton.GlobalConfig;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -12,18 +20,35 @@ public class TankFrame extends Frame {
 
     public static final int GAME_WIDTH = GlobalConfig.GAME_WIDTH;
     public static final int GAME_HEIGHT = GlobalConfig.GAME_HEIGHT;
+    private GameFactory gf;
+    private BaseTank mainTank;
+    private List<BaseTank> tList = new ArrayList<>();
+    private List<BaseBullet> bList = new ArrayList<>();
+    private List<BaseExpolde> eList = new ArrayList<>();
 
-    Tank mainTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
-    List<Tank> tList = new ArrayList<>();
-    List<Bullet> bList = new ArrayList<>();
-    List<Expolde> eList = new ArrayList<>();
+    public List<BaseTank> gettList() {
+        return tList;
+    }
 
-    public TankFrame() {
-        setTitle("tank war");
+    public List<BaseBullet> getbList() {
+        return bList;
+    }
+
+    public List<BaseExpolde> geteList() {
+        return eList;
+    }
+
+    public GameFactory getGf() {
+        return gf;
+    }
+
+    public TankFrame(GameFactory gf) {
+        mainTank = gf.createTank(200, 400, Dir.DOWN, Group.GOOD, this);
+        setTitle("坦克大战");
         setSize(GAME_WIDTH, GAME_HEIGHT);
         setResizable(false);
         setVisible(true);
-
+        this.gf = gf;
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -68,12 +93,11 @@ public class TankFrame extends Frame {
             eList.get(i).paint(g);
         }
         for (int i = 0; i < bList.size(); i++) {
-            Bullet b = bList.get(i);
+            BaseBullet b = bList.get(i);
             for (int j = 0; j < tList.size(); j++) {
                 b.collideWith(tList.get(j));
             }
         }
-
 
 
     }
