@@ -6,7 +6,7 @@ import java.util.Random;
 public class Tank {
     private int x = 200, y = 200;
     private Dir dir = Dir.DOWN;
-    private static final int SPEED = PropMgr.getInstance().getInt(KeyConstant.TANK_SPEED);
+    private static final int SPEED = GlobalConfig.TANK_SPEED;
     public static final int WIDTH = ResMgr.bTankD.getWidth();
     public static final int HEIGHT = ResMgr.bTankD.getHeight();
     public static final Random RANDOM = new Random();
@@ -16,6 +16,7 @@ public class Tank {
     private Group group = Group.BAD;
     private TankFrame tf = null;
     private Rectangle rect = new Rectangle(x, y, WIDTH, HEIGHT);
+    private FireStrategy fs;
 
 
     public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
@@ -24,6 +25,20 @@ public class Tank {
         this.dir = dir;
         this.tf = tf;
         this.group = group;
+        String fsName = GlobalConfig.BAD_TANK_FIRE_STRATEGY;
+        if (this.group == Group.GOOD) {
+            fsName = GlobalConfig.GOOD_TANK_FIRE_STRATEGY;
+        }
+        try {
+            this.fs = (FireStrategy) Class.forName(fsName).newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public Group getGroup() {
@@ -58,6 +73,17 @@ public class Tank {
         this.dir = dir;
     }
 
+    public TankFrame getTf() {
+        return tf;
+    }
+
+    public void setTf(TankFrame tf) {
+        this.tf = tf;
+    }
+
+    public void setRect(Rectangle rect) {
+        this.rect = rect;
+    }
 
     public boolean isMoving() {
         return moving;
@@ -93,11 +119,7 @@ public class Tank {
      * 开火
      */
     public void fire() {
-        int bx = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
-        int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tf.bList.add(new Bullet(bx, by, dir, group, tf));
-        if (this.group == Group.GOOD) new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
-
+        fs.fire(this);
     }
 
     /**

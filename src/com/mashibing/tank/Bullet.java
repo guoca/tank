@@ -3,7 +3,7 @@ package com.mashibing.tank;
 import java.awt.*;
 
 public class Bullet {
-    private static final int SPEED = PropMgr.getInstance().getInt(KeyConstant.BULLET_SPEED);
+    private static final int SPEED = GlobalConfig.BULLET_SPEED;
     public static final int WIDTH = ResMgr.bulletD.getWidth();
     public static final int HEIGHT = ResMgr.bulletD.getHeight();
     private int x, y;
@@ -19,6 +19,7 @@ public class Bullet {
         this.dir = dir;
         this.tf = tf;
         this.group = group;
+        tf.bList.add(this);
     }
 
     public void paint(Graphics g) {
