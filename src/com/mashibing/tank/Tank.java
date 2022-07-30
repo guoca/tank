@@ -88,6 +88,9 @@ public class Tank {
         move();
     }
 
+    /**
+     * 开火
+     */
     public void fire() {
         int bx = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
         int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
@@ -126,13 +129,50 @@ public class Tank {
                 break;
         }
         if (this.group == Group.BAD && RANDOM.nextInt(100) > 95) fire();
-        if (this.group == Group.BAD && RANDOM.nextInt(100) > 95) randomDir();
-//        if(this.group == Group.GOOD) new Thread(()->new Audio("audio/tank_move.wav").play()).start();
-
+        if (this.group == Group.BAD && RANDOM.nextInt(100) > 95) randomChangeDir(dir);
+        boundsCheck();
     }
 
-    private void randomDir() {
-        this.dir = Dir.values()[RANDOM.nextInt(4)];
+    /**
+     * 边界检查
+     */
+    private void boundsCheck() {
+        boolean needChangeDir = false;
+        if (x < 5) {
+            x = 5 + SPEED;
+            needChangeDir = true;
+        }
+        if (y < 30) {
+            y = 30 + SPEED;
+            needChangeDir = true;
+        }
+        if (x > TankFrame.GAME_WIDTH - Tank.WIDTH - 5) {
+            x = TankFrame.GAME_WIDTH - Tank.WIDTH - (5 + SPEED);
+            needChangeDir = true;
+        }
+        if (y > TankFrame.GAME_HEIGHT - Tank.HEIGHT - 5) {
+            y = TankFrame.GAME_HEIGHT - Tank.HEIGHT - (5 + SPEED);
+            needChangeDir = true;
+        }
+        if (needChangeDir) {
+            randomChangeDir(dir);
+        }
+    }
+
+    /**
+     * 随机转向
+     *
+     * @param sDir
+     */
+    private void randomChangeDir(Dir sDir) {
+        int i = RANDOM.nextInt(4);
+        if (sDir != null) {
+            int ordinal = sDir.ordinal();
+            while (ordinal != i) {
+                break;
+            }
+        }
+        this.dir = Dir.values()[i];
     }
 
     public void die() {
