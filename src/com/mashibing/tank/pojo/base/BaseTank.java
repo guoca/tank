@@ -22,7 +22,7 @@ public abstract class BaseTank {
     protected Dir dir = Dir.DOWN;
     protected boolean moving = false;
     protected boolean living = true;
-    protected TankFrame tf;
+    protected GameModel gm;
     protected FireStrategy fs;
     protected Rectangle rect = new Rectangle(x, y, WIDTH, HEIGHT);
     /**
@@ -74,8 +74,8 @@ public abstract class BaseTank {
         return living;
     }
 
-    public TankFrame getTf() {
-        return tf;
+    public GameModel getGm() {
+        return gm;
     }
 
     public FireStrategy getFs() {

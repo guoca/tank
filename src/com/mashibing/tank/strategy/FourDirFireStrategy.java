@@ -1,5 +1,6 @@
 package com.mashibing.tank.strategy;
 
+import com.mashibing.tank.GameModel;
 import com.mashibing.tank.util.AudioUtil;
 import com.mashibing.tank.enums.Dir;
 import com.mashibing.tank.enums.Group;
@@ -14,7 +15,8 @@ public class FourDirFireStrategy implements FireStrategy {
         int by = t.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {
-            t.getTf().getGf().createBullet(bx, by, dir, t.getGroup(), t.getTf());
+            GameModel gm = t.getGm();
+            gm.getGf().createBullet(bx, by, dir, t.getGroup(), gm);
         }
         if (t.getGroup() == Group.GOOD) new Thread(() -> new AudioUtil("audio/tank_fire.wav").play()).start();
 

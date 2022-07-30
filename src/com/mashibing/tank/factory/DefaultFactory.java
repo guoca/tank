@@ -1,5 +1,6 @@
 package com.mashibing.tank.factory;
 
+import com.mashibing.tank.GameModel;
 import com.mashibing.tank.enums.Dir;
 import com.mashibing.tank.enums.Group;
 import com.mashibing.tank.TankFrame;
@@ -15,17 +16,17 @@ import com.mashibing.tank.pojo.base.BaseTank;
  */
 public class DefaultFactory extends GameFactory {
     @Override
-    public BaseTank createTank(int x, int y, Dir dir, Group group, TankFrame tf) {
-        return new Tank(x, y, dir, group, tf);
+    public BaseTank createTank(int x, int y, Dir dir, Group group, GameModel gm) {
+        return new Tank(x, y, dir, group, gm);
     }
 
     @Override
-    public BaseBullet createBullet(int x, int y, Dir dir, Group group, TankFrame tf) {
-        return new Bullet(x, y, dir, group, tf);
+    public BaseBullet createBullet(int x, int y, Dir dir, Group group, GameModel gm) {
+        return new Bullet(x, y, dir, group, gm);
     }
 
     @Override
-    public BaseExpolde createExpolde(int x, int y, TankFrame tf) {
-        return new Expolde(x, y, tf);
+    public BaseExpolde createExpolde(int x, int y, GameModel gm) {
+        return new Expolde(x, y, gm);
     }
 }

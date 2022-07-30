@@ -13,11 +13,11 @@ import java.awt.*;
 public class Tank extends BaseTank {
 
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         super.dir = dir;
-        this.tf = tf;
+        this.gm = gm;
         this.group = group;
         String fsName = GlobalConfig.BAD_TANK_FIRE_STRATEGY;
         if (this.group == Group.GOOD) {
@@ -37,7 +37,7 @@ public class Tank extends BaseTank {
 
 
     public void paint(Graphics g) {
-        if (!living) tf.gettList().remove(this);
+        if (!living) gm.gettList().remove(this);
         switch (dir) {
             case LEFT:
                 g.drawImage(this.group == Group.BAD ? ResMgr.bTankL : ResMgr.gTankL, x, y, null);
