@@ -14,8 +14,7 @@ public class Tank extends BaseTank {
 
 
     public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
-        this.x = x;
-        this.y = y;
+        super(x,y);
         super.dir = dir;
         this.gm = gm;
         this.group = group;
@@ -60,9 +59,12 @@ public class Tank extends BaseTank {
 
 
     private void move() {
+        ox = x;
+        oy = y;
         if (!isMoving() && group == Group.GOOD) {
             return;
         }
+
         switch (dir) {
             case LEFT:
                 x -= SPEED;

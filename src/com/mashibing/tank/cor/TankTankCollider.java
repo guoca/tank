@@ -7,27 +7,17 @@ import com.mashibing.tank.pojo.base.BaseGameObject;
 public class TankTankCollider implements Collider {
     @Override
     public boolean collide(BaseGameObject o1, BaseGameObject o2) {
-        if (o1 instanceof Tank && o2 instanceof Tank) {
+        if (o1 instanceof Tank && o2 instanceof Tank && o1!=o2) {
             Tank t1 = (Tank) o1;
             Tank t2 = (Tank) o2;
-            return collideWith(t1, t2);
+            if (t1.getRect().intersects(t2.getRect())) {
+                t1.back();
+                t2.back();
+            }
         }
         return true;
 
     }
 
-    private boolean collideWith(Tank t1, Tank t2) {
-        if (t1.getRect().intersects(t2.getRect())) {
-            if (t1.getGroup() == Group.BAD) {
-                t1.randomChangeDir();
-            }
-            if (t2.getGroup() == Group.BAD) {
-                t2.randomChangeDir();
-            }
-
-            return false;
-        }
-        return true;
-    }
 
 }

@@ -11,13 +11,11 @@ import java.awt.*;
 public class Expolde extends BaseExpolde {
     public static final int WIDTH = ResMgr.explodeArr[0].getWidth();
     public static final int HEIGHT = ResMgr.explodeArr[0].getHeight();
-    private int x, y;
     private int i = 0;
     private GameModel gm;
 
     public Expolde(int x, int y, GameModel gm) {
-        this.x = x;
-        this.y = y;
+        super(x,y);
         this.gm = gm;
         //爆炸音效
         new Thread(() -> new AudioUtil("audio/explode.wav").play()).start();

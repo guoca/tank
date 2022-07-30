@@ -14,19 +14,19 @@ public class Bullet extends BaseBullet {
     private static final int SPEED = GlobalConfig.BULLET_SPEED;
     public static final int WIDTH = ResMgr.bulletD.getWidth();
     public static final int HEIGHT = ResMgr.bulletD.getHeight();
-    private int x, y;
     private Dir dir;
     private Group group;
     private boolean living = true;
-    private Rectangle rect = new Rectangle(x, y, WIDTH, HEIGHT);
+    private Rectangle rect;
 
     public Bullet(int x, int y, Dir dir, Group group, GameModel gm) {
-        this.x = x;
-        this.y = y;
+        super(x,y);
         this.dir = dir;
         this.gm = gm;
         this.group = group;
+        rect = new Rectangle(x, y, WIDTH, HEIGHT);
         gm.add(this);
+
     }
 
     public void paint(Graphics g) {

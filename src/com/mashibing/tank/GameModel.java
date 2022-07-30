@@ -7,6 +7,7 @@ import com.mashibing.tank.enums.Dir;
 import com.mashibing.tank.enums.Group;
 import com.mashibing.tank.factory.DefaultFactory;
 import com.mashibing.tank.factory.GameFactory;
+import com.mashibing.tank.pojo.Wall;
 import com.mashibing.tank.pojo.base.BaseGameObject;
 import com.mashibing.tank.pojo.base.BaseTank;
 import com.mashibing.tank.singleton.GlobalConfig;
@@ -21,14 +22,20 @@ public class GameModel {
     private GameFactory gf;
     ColliderChain cc = new ColliderChain();
     public GameModel() {
-        int tankCount = GlobalConfig.INIT_TANK_COUNT;
         gf = new DefaultFactory();
+        //初始化主坦克
+        mainTank = gf.createTank(200, 400, Dir.DOWN, Group.GOOD, this);
+        int tankCount = GlobalConfig.INIT_TANK_COUNT;
+        //初始化敌方坦克
         for (int i = 0; i < tankCount; i++) {
             objList.add(getGf().createTank(50 + i * 80, 200, Dir.DOWN, Group.BAD, this));
         }
+        //初始化墙体
+        add(new Wall(150,150,200,50));
+        add(new Wall(550,150,200,50));
+        add(new Wall(300,300,50,200));
+        add(new Wall(550,300,50,200));
 
-        this.gf = gf;
-        mainTank = gf.createTank(200, 400, Dir.DOWN, Group.GOOD, this);
     }
 
     private List<BaseGameObject> objList = new ArrayList<>();

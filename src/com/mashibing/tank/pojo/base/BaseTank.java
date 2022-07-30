@@ -12,6 +12,7 @@ import java.util.Random;
 
 public abstract class BaseTank extends BaseGameObject {
 
+    protected int ox, oy;
     public static final int WIDTH = ResMgr.bTankD.getWidth();
     public static final int HEIGHT = ResMgr.bTankD.getHeight();
     public static final Random RANDOM = new Random();
@@ -24,6 +25,10 @@ public abstract class BaseTank extends BaseGameObject {
     protected GameModel gm;
     protected FireStrategy fs;
     protected Rectangle rect = new Rectangle(x, y, WIDTH, HEIGHT);
+
+    public BaseTank(int x, int y) {
+        super(x, y);
+    }
 
     /**
      * 销毁
@@ -99,5 +104,10 @@ public abstract class BaseTank extends BaseGameObject {
             break;
         }
         dir = Dir.values()[i];
+    }
+
+    public void back() {
+        x = ox;
+        y = oy;
     }
 }
