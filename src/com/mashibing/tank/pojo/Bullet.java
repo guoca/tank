@@ -17,7 +17,6 @@ public class Bullet extends BaseBullet {
     private int x, y;
     private Dir dir;
     private Group group;
-    private GameModel gm;
     private boolean living = true;
     private Rectangle rect = new Rectangle(x, y, WIDTH, HEIGHT);
 
@@ -27,12 +26,12 @@ public class Bullet extends BaseBullet {
         this.dir = dir;
         this.gm = gm;
         this.group = group;
-        gm.getbList().add(this);
+        gm.add(this);
     }
 
     public void paint(Graphics g) {
         if (!living) {
-            gm.getbList().remove(this);
+            gm.remove(this);
         }
         switch (dir) {
             case LEFT:
@@ -78,21 +77,7 @@ public class Bullet extends BaseBullet {
         rect.y = y;
     }
 
-    /**
-     * 碰撞
-     *
-     * @param t
-     */
-    public void collideWith(BaseTank t) {
-        if (this.group == t.getGroup()) return;
-        if (this.getRect().intersects(t.getRect())) {
-            t.die();
-            this.die();
-            int eX = t.getX() + Tank.WIDTH / 2 - Expolde.WIDTH / 2;
-            int eY = t.getY() + Tank.HEIGHT / 2 - Expolde.HEIGHT / 2;
-            gm.geteList().add(gm.getGf().createExpolde(eX, eY, gm));
-        }
-    }
+
 
     /**
      * 获取子弹坐标
@@ -103,8 +88,12 @@ public class Bullet extends BaseBullet {
         return this.rect;
     }
 
-    private void die() {
+    public void die() {
         this.living = false;
+    }
+
+    public Group getGroup() {
+        return group;
     }
 }
 

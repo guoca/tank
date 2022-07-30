@@ -1,10 +1,5 @@
 package com.mashibing.tank;
 
-import com.mashibing.tank.enums.Dir;
-import com.mashibing.tank.enums.Group;
-import com.mashibing.tank.factory.DefaultFactory;
-import com.mashibing.tank.factory.GameFactory;
-import com.mashibing.tank.singleton.GlobalConfig;
 import com.mashibing.tank.util.AudioUtil;
 
 public class Main {

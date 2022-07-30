@@ -16,4 +16,5 @@ public class GlobalConfig {
     public static final int BULLET_SPEED = configMgr.getInt("bulletSpeed");
     public static final String GOOD_TANK_FIRE_STRATEGY = configMgr.getStr("goodTankFireStrategy");
     public static final String BAD_TANK_FIRE_STRATEGY = configMgr.getStr("badTankFireStrategy");
+    public static final String COLLIDERS = configMgr.getStr("colliders");
 }

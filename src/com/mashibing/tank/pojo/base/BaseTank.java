@@ -1,6 +1,6 @@
 package com.mashibing.tank.pojo.base;
 
-import com.mashibing.tank.*;
+import com.mashibing.tank.GameModel;
 import com.mashibing.tank.enums.Dir;
 import com.mashibing.tank.enums.Group;
 import com.mashibing.tank.singleton.GlobalConfig;
@@ -10,14 +10,13 @@ import com.mashibing.tank.strategy.FireStrategy;
 import java.awt.*;
 import java.util.Random;
 
-public abstract class BaseTank {
+public abstract class BaseTank extends BaseGameObject {
 
     public static final int WIDTH = ResMgr.bTankD.getWidth();
     public static final int HEIGHT = ResMgr.bTankD.getHeight();
     public static final Random RANDOM = new Random();
 
     protected static final int SPEED = GlobalConfig.TANK_SPEED;
-    protected int x, y;
     protected Group group = Group.BAD;
     protected Dir dir = Dir.DOWN;
     protected boolean moving = false;
@@ -25,6 +24,7 @@ public abstract class BaseTank {
     protected GameModel gm;
     protected FireStrategy fs;
     protected Rectangle rect = new Rectangle(x, y, WIDTH, HEIGHT);
+
     /**
      * 销毁
      */
@@ -48,7 +48,6 @@ public abstract class BaseTank {
         fs.fire(this);
     }
 
-    public abstract void paint(Graphics g);
 
     public int getX() {
         return x;
@@ -88,5 +87,17 @@ public abstract class BaseTank {
 
     public void setMoving(boolean moving) {
         this.moving = moving;
+    }
+
+    /**
+     * 随机转向
+     */
+    public void randomChangeDir() {
+        int i = RANDOM.nextInt(4);
+        int ordinal = dir.ordinal();
+        while (ordinal != i) {
+            break;
+        }
+        dir = Dir.values()[i];
     }
 }

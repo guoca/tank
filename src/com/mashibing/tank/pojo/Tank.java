@@ -37,7 +37,7 @@ public class Tank extends BaseTank {
 
 
     public void paint(Graphics g) {
-        if (!living) gm.gettList().remove(this);
+        if (!living) gm.getObjList().remove(this);
         switch (dir) {
             case LEFT:
                 g.drawImage(this.group == Group.BAD ? ResMgr.bTankL : ResMgr.gTankL, x, y, null);
@@ -80,7 +80,7 @@ public class Tank extends BaseTank {
                 break;
         }
         if (this.group == Group.BAD && RANDOM.nextInt(100) > 95) fire();
-        if (this.group == Group.BAD && RANDOM.nextInt(100) > 95) randomChangeDir(dir);
+        if (this.group == Group.BAD && RANDOM.nextInt(100) > 95) randomChangeDir();
         boundsCheck();
         rect.x = x;
         rect.y = y;
@@ -108,24 +108,9 @@ public class Tank extends BaseTank {
             needChangeDir = true;
         }
         if (needChangeDir) {
-            randomChangeDir(dir);
+            randomChangeDir();
         }
     }
 
-    /**
-     * 随机转向
-     *
-     * @param sDir
-     */
-    private void randomChangeDir(Dir sDir) {
-        int i = RANDOM.nextInt(4);
-        if (sDir != null) {
-            int ordinal = sDir.ordinal();
-            while (ordinal != i) {
-                break;
-            }
-        }
-        this.dir = Dir.values()[i];
-    }
 
 }

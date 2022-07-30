@@ -25,7 +25,7 @@ public class Expolde extends BaseExpolde {
 
     public void paint(Graphics g) {
         g.drawImage(ResMgr.explodeArr[i++], x, y, null);
-        if (i >= ResMgr.explodeArr.length) gm.geteList().remove(this);
+        if (i >= ResMgr.explodeArr.length) gm.remove(this);
     }
 
 
