@@ -10,8 +10,8 @@ import java.util.List;
 
 public class TankFrame extends Frame {
 
-    public static final int GAME_WIDTH = 1080;
-    public static final int GAME_HEIGHT = 960;
+    public static final int GAME_WIDTH = PropMgr.getInstance().getInt(KeyConstant.GAME_WIDTH);
+    public static final int GAME_HEIGHT = PropMgr.getInstance().getInt(KeyConstant.GAME_HEIGHT);
 
     Tank mainTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
     List<Tank> tList = new ArrayList<>();

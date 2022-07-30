@@ -6,7 +6,7 @@ import java.util.Random;
 public class Tank {
     private int x = 200, y = 200;
     private Dir dir = Dir.DOWN;
-    private static final int SPEED = 3;
+    private static final int SPEED = PropMgr.getInstance().getInt(KeyConstant.TANK_SPEED);
     public static final int WIDTH = ResMgr.bTankD.getWidth();
     public static final int HEIGHT = ResMgr.bTankD.getHeight();
     public static final Random RANDOM = new Random();

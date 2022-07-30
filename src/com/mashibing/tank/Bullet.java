@@ -3,14 +3,14 @@ package com.mashibing.tank;
 import java.awt.*;
 
 public class Bullet {
-    private static final int SPEED = 5;
+    private static final int SPEED = PropMgr.getInstance().getInt(KeyConstant.BULLET_SPEED);
     public static final int WIDTH = ResMgr.bulletD.getWidth();
     public static final int HEIGHT = ResMgr.bulletD.getHeight();
     private int x, y;
     private Dir dir;
+    private Group group;
+    private TankFrame tf;
     private boolean living = true;
-    private Group group = Group.BAD;
-    private TankFrame tf = null;
     private Rectangle rect = new Rectangle(x, y, WIDTH, HEIGHT);
 
     public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
