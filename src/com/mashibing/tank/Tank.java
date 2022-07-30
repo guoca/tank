@@ -15,6 +15,7 @@ public class Tank {
     private boolean moving = false;
     private Group group = Group.BAD;
     private TankFrame tf = null;
+    private Rectangle rect = new Rectangle(x, y, WIDTH, HEIGHT);
 
 
     public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
@@ -105,7 +106,7 @@ public class Tank {
      * @return
      */
     public Rectangle getRect() {
-        return new Rectangle(this.x, this.y, this.WIDTH, this.HEIGHT);
+        return this.rect;
     }
 
     private void move() {
@@ -131,6 +132,8 @@ public class Tank {
         if (this.group == Group.BAD && RANDOM.nextInt(100) > 95) fire();
         if (this.group == Group.BAD && RANDOM.nextInt(100) > 95) randomChangeDir(dir);
         boundsCheck();
+        rect.x = x;
+        rect.y = y;
     }
 
     /**

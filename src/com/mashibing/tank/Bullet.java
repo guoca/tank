@@ -11,6 +11,7 @@ public class Bullet {
     private boolean living = true;
     private Group group = Group.BAD;
     private TankFrame tf = null;
+    private Rectangle rect = new Rectangle(x, y, WIDTH, HEIGHT);
 
     public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
@@ -60,7 +61,12 @@ public class Bullet {
             default:
                 break;
         }
-        if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) living = false;
+        if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
+            living = false;
+            return;
+        }
+        rect.x = x;
+        rect.y = y;
     }
 
     /**
@@ -85,7 +91,7 @@ public class Bullet {
      * @return
      */
     public Rectangle getRect() {
-        return new Rectangle(this.x, this.y, this.WIDTH, this.HEIGHT);
+        return this.rect;
     }
 
     private void die() {
