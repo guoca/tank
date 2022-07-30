@@ -12,4 +12,8 @@ public abstract class BaseWall extends BaseGameObject {
         this.h = h;
         this.rect = new Rectangle(x, y, w, h);
     }
+
+    public Rectangle getRect() {
+        return rect;
+    }
 }
