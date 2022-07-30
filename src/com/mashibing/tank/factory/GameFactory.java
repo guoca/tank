@@ -1,6 +1,6 @@
 package com.mashibing.tank.factory;
 
-import com.mashibing.tank.*;
+import com.mashibing.tank.GameModel;
 import com.mashibing.tank.enums.Dir;
 import com.mashibing.tank.enums.Group;
 import com.mashibing.tank.pojo.base.BaseBullet;

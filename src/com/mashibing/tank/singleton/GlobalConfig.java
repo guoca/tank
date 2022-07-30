@@ -1,7 +1,5 @@
 package com.mashibing.tank.singleton;
 
-import com.mashibing.tank.singleton.ConfigMgr;
-
 public class GlobalConfig {
 
     private GlobalConfig() {

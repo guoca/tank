@@ -1,10 +1,6 @@
 package com.mashibing.tank;
 
 import com.mashibing.tank.enums.Dir;
-import com.mashibing.tank.enums.Group;
-import com.mashibing.tank.factory.GameFactory;
-import com.mashibing.tank.pojo.base.BaseBullet;
-import com.mashibing.tank.pojo.base.BaseExpolde;
 import com.mashibing.tank.pojo.base.BaseTank;
 import com.mashibing.tank.singleton.GlobalConfig;
 
@@ -13,8 +9,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TankFrame extends Frame {
     public static final int GAME_WIDTH = GlobalConfig.GAME_WIDTH;

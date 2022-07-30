@@ -1,6 +1,5 @@
 package com.mashibing.tank.strategy;
 
-import com.mashibing.tank.pojo.Tank;
 import com.mashibing.tank.pojo.base.BaseTank;
 
 /**

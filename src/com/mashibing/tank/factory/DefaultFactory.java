@@ -3,7 +3,6 @@ package com.mashibing.tank.factory;
 import com.mashibing.tank.GameModel;
 import com.mashibing.tank.enums.Dir;
 import com.mashibing.tank.enums.Group;
-import com.mashibing.tank.TankFrame;
 import com.mashibing.tank.pojo.Bullet;
 import com.mashibing.tank.pojo.Expolde;
 import com.mashibing.tank.pojo.Tank;

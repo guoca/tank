@@ -1,8 +1,6 @@
 package com.mashibing.tank;
 
-import com.mashibing.tank.cor.BulletTankCollider;
 import com.mashibing.tank.cor.ColliderChain;
-import com.mashibing.tank.cor.TankTankCollider;
 import com.mashibing.tank.enums.Dir;
 import com.mashibing.tank.enums.Group;
 import com.mashibing.tank.factory.DefaultFactory;

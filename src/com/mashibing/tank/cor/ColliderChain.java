@@ -1,7 +1,6 @@
 package com.mashibing.tank.cor;
 
 import com.mashibing.tank.pojo.base.BaseGameObject;
-import com.mashibing.tank.singleton.ConfigMgr;
 import com.mashibing.tank.singleton.GlobalConfig;
 
 import java.util.ArrayList;
