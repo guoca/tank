@@ -27,8 +27,7 @@ public class BulletTankCollider implements Collider {
             b.die();
             int eX = t.getX() + Tank.WIDTH / 2 - Expolde.WIDTH / 2;
             int eY = t.getY() + Tank.HEIGHT / 2 - Expolde.HEIGHT / 2;
-            GameModel gm = b.getGm();
-            gm.add(gm.getGf().createExpolde(eX, eY, gm));
+            GameModel.getInstance().getGf().createExpolde(eX, eY);
             return false;
         }
         return true;

@@ -15,17 +15,17 @@ import com.mashibing.tank.pojo.base.BaseTank;
  */
 public class DefaultFactory extends GameFactory {
     @Override
-    public BaseTank createTank(int x, int y, Dir dir, Group group, GameModel gm) {
-        return new Tank(x, y, dir, group, gm);
+    public BaseTank createTank(int x, int y, Dir dir, Group group) {
+        return new Tank(x, y, dir, group);
     }
 
     @Override
-    public BaseBullet createBullet(int x, int y, Dir dir, Group group, GameModel gm) {
-        return new Bullet(x, y, dir, group, gm);
+    public BaseBullet createBullet(int x, int y, Dir dir, Group group) {
+        return new Bullet(x, y, dir, group);
     }
 
     @Override
-    public BaseExpolde createExpolde(int x, int y, GameModel gm) {
-        return new Expolde(x, y, gm);
+    public BaseExpolde createExpolde(int x, int y) {
+        return new Expolde(x, y);
     }
 }

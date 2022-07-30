@@ -17,23 +17,38 @@ import java.util.List;
 public class GameModel {
 
     private BaseTank mainTank;
-    private GameFactory gf;
+    private GameFactory gf = new DefaultFactory();
     ColliderChain cc = new ColliderChain();
-    public GameModel() {
-        gf = new DefaultFactory();
+
+    private static final GameModel GM = new GameModel();
+
+    static {
+        GM.init();
+    }
+
+    private void init() {
         //初始化主坦克
-        mainTank = gf.createTank(200, 400, Dir.DOWN, Group.GOOD, this);
+        mainTank = gf.createTank(200, 400, Dir.DOWN, Group.GOOD);
         int tankCount = GlobalConfig.INIT_TANK_COUNT;
         //初始化敌方坦克
         for (int i = 0; i < tankCount; i++) {
-            objList.add(getGf().createTank(50 + i * 80, 200, Dir.DOWN, Group.BAD, this));
+            gf.createTank(50 + i * 80, 200, Dir.DOWN, Group.BAD);
         }
         //初始化墙体
-        add(new Wall(150,150,200,50));
-        add(new Wall(550,150,200,50));
-        add(new Wall(300,300,50,200));
-        add(new Wall(550,300,50,200));
+        add(new Wall(150, 150, 200, 50));
+        add(new Wall(550, 150, 200, 50));
+        add(new Wall(300, 300, 50, 200));
+        add(new Wall(550, 300, 50, 200));
 
+    }
+
+
+    private GameModel() {
+
+    }
+
+    public static GameModel getInstance() {
+        return GM;
     }
 
     private List<BaseGameObject> objList = new ArrayList<>();

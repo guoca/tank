@@ -12,9 +12,9 @@ import com.mashibing.tank.pojo.base.BaseTank;
  */
 public abstract class GameFactory {
 
-    public abstract BaseTank createTank(int x, int y, Dir dir, Group group, GameModel gm);
+    public abstract BaseTank createTank(int x, int y, Dir dir, Group group);
 
-    public abstract BaseBullet createBullet(int x, int y, Dir dir, Group group, GameModel gm);
+    public abstract BaseBullet createBullet(int x, int y, Dir dir, Group group);
 
-    public abstract BaseExpolde createExpolde(int x, int y, GameModel gm);
+    public abstract BaseExpolde createExpolde(int x, int y);
 }

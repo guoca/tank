@@ -14,14 +14,8 @@ public class TankFrame extends Frame {
     public static final int GAME_WIDTH = GlobalConfig.GAME_WIDTH;
     public static final int GAME_HEIGHT = GlobalConfig.GAME_HEIGHT;
 
-    private GameModel gm;
-
-    public GameModel getGm() {
-        return gm;
-    }
 
     public TankFrame() {
-        gm = new GameModel();
         setTitle("坦克大战");
         setSize(GAME_WIDTH, GAME_HEIGHT);
         setResizable(false);
@@ -54,8 +48,7 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
-        gm.paint(g);
-
+        GameModel.getInstance().paint(g);
 
     }
 
@@ -88,7 +81,7 @@ public class TankFrame extends Frame {
         }
 
         private void setMainTankDir() {
-            BaseTank mainTank = gm.getMainTank();
+            BaseTank mainTank = GameModel.getInstance().getMainTank();
             if (!(bL || bR || bU || bD)) {
                 mainTank.setMoving(false);
             } else {
@@ -118,7 +111,7 @@ public class TankFrame extends Frame {
                     bD = true;
                     break;
                 case KeyEvent.VK_SPACE:
-                    gm.getMainTank().fire();
+                    GameModel.getInstance().getMainTank().fire();
                     break;
                 default:
                     break;

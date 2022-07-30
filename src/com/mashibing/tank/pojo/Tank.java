@@ -14,10 +14,9 @@ import java.awt.*;
 public class Tank extends BaseTank {
 
 
-    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
+    public Tank(int x, int y, Dir dir, Group group) {
         super(x,y);
         super.dir = dir;
-        this.gm = gm;
         this.group = group;
         String fsName = GlobalConfig.BAD_TANK_FIRE_STRATEGY;
         if (this.group == Group.GOOD) {
@@ -32,12 +31,12 @@ public class Tank extends BaseTank {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
+        GameModel.getInstance().add(this);
     }
 
 
     public void paint(Graphics g) {
-        if (!living) gm.getObjList().remove(this);
+        if (!living) GameModel.getInstance().getObjList().remove(this);
         switch (dir) {
             case LEFT:
                 g.drawImage(this.group == Group.BAD ? ResMgr.bTankL : ResMgr.gTankL, x, y, null);

@@ -7,7 +7,6 @@ public class Main {
         //背景音乐
         new Thread(() -> new AudioUtil("audio/war1.wav").loop()).start();
         TankFrame tf = new TankFrame();
-
         while (true) {
             Thread.sleep(100);
             tf.repaint();

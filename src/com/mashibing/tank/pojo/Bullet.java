@@ -19,19 +19,17 @@ public class Bullet extends BaseBullet {
     private boolean living = true;
     private Rectangle rect;
 
-    public Bullet(int x, int y, Dir dir, Group group, GameModel gm) {
+    public Bullet(int x, int y, Dir dir, Group group) {
         super(x,y);
         this.dir = dir;
-        this.gm = gm;
         this.group = group;
         rect = new Rectangle(x, y, WIDTH, HEIGHT);
-        gm.add(this);
-
+        GameModel.getInstance().add(this);
     }
 
     public void paint(Graphics g) {
         if (!living) {
-            gm.remove(this);
+            GameModel.getInstance().remove(this);
         }
         switch (dir) {
             case LEFT:

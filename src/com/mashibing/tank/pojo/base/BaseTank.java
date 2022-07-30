@@ -22,7 +22,6 @@ public abstract class BaseTank extends BaseGameObject {
     protected Dir dir = Dir.DOWN;
     protected boolean moving = false;
     protected boolean living = true;
-    protected GameModel gm;
     protected FireStrategy fs;
     protected Rectangle rect = new Rectangle(x, y, WIDTH, HEIGHT);
 
@@ -78,9 +77,6 @@ public abstract class BaseTank extends BaseGameObject {
         return living;
     }
 
-    public GameModel getGm() {
-        return gm;
-    }
 
     public FireStrategy getFs() {
         return fs;

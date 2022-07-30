@@ -11,18 +11,17 @@ public class Expolde extends BaseExpolde {
     public static final int WIDTH = ResMgr.explodeArr[0].getWidth();
     public static final int HEIGHT = ResMgr.explodeArr[0].getHeight();
     private int i = 0;
-    private GameModel gm;
 
-    public Expolde(int x, int y, GameModel gm) {
-        super(x,y);
-        this.gm = gm;
+    public Expolde(int x, int y) {
+        super(x, y);
         //爆炸音效
         new Thread(() -> new AudioUtil("audio/explode.wav").play()).start();
+        GameModel.getInstance().add(this);
     }
 
     public void paint(Graphics g) {
         g.drawImage(ResMgr.explodeArr[i++], x, y, null);
-        if (i >= ResMgr.explodeArr.length) gm.remove(this);
+        if (i >= ResMgr.explodeArr.length) GameModel.getInstance().remove(this);
     }
 
 
