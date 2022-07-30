@@ -1,5 +1,6 @@
 package com.mashibing.tank.pojo;
 
+import com.mashibing.tank.GameModel;
 import com.mashibing.tank.pojo.base.BaseWall;
 
 import java.awt.*;
@@ -8,6 +9,7 @@ public class Wall extends BaseWall {
 
     public Wall(int x, int y, int w, int h) {
         super(x, y, w, h);
+        GameModel.getInstance().add(this);
     }
 
     @Override
