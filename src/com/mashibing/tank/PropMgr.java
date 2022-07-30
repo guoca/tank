@@ -4,13 +4,17 @@ package com.mashibing.tank;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * 配置管理类
+ */
 public class PropMgr {
+
+    private static Properties pro = new Properties();
 
     private PropMgr() {
     }
 
-    private static PropMgr propMgr = null;
-    private static Properties pro = new Properties();
+    private static PropMgr propMgr = new PropMgr();
 
     static {
         try {
@@ -21,20 +25,17 @@ public class PropMgr {
     }
 
 
+    public static PropMgr getInstance() {
+        return propMgr;
+    }
 
-
-    public static Object getObj(String key) {
+    public String getStr(String key) {
         return pro.getProperty(key);
     }
 
-    public static String getStr(String key) {
-        return pro.getProperty(key);
-    }
-
-    public static int getInt(String key) {
+    public int getInt(String key) {
         return Integer.parseInt(getStr(key));
     }
-
 
 
 }
