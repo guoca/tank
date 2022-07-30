@@ -16,6 +16,7 @@ public class ResMgr {
     public static BufferedImage gTankL, gTankR, gTankU, gTankD;
     public static BufferedImage bTankL, bTankR, bTankU, bTankD;
     public static BufferedImage bulletL, bulletR, bulletU, bulletD;
+    public static BufferedImage bulletL_B, bulletR_B, bulletU_B, bulletD_B;
     public static BufferedImage[] explodeArr = new BufferedImage[16];
 
     static {
@@ -32,6 +33,10 @@ public class ResMgr {
             bulletL = ImgUtil.rotateImg(bulletU, -90);
             bulletR = ImgUtil.rotateImg(bulletU, 90);
             bulletD = ImgUtil.rotateImg(bulletU, 180);
+            bulletU_B = ImageIO.read(ResMgr.class.getClassLoader().getResourceAsStream("images/bulletU.png"));
+            bulletL_B = ImgUtil.rotateImg(bulletU_B, -90);
+            bulletR_B = ImgUtil.rotateImg(bulletU_B, 90);
+            bulletD_B = ImgUtil.rotateImg(bulletU_B, 180);
             for (int i = 0; i < 16; i++) {
                 explodeArr[i] = ImageIO.read(ResMgr.class.getClassLoader().getResourceAsStream("images/e" + (i + 1) + ".gif"));
             }
