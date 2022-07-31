@@ -1,6 +1,5 @@
 package com.mashibing.tank.pojo;
 
-import com.mashibing.tank.GameModel;
 import com.mashibing.tank.TankFrame;
 import com.mashibing.tank.enums.Dir;
 import com.mashibing.tank.enums.Group;
@@ -17,10 +16,8 @@ public class Bullet extends BaseBullet {
         super(x, y, dir, group);
     }
 
+
     public void paint(Graphics g) {
-        if (!living) {
-            GameModel.getInstance().remove(this);
-        }
         switch (dir) {
             case LEFT:
                 g.drawImage(ResMgr.bulletL_B, x, y, null);
@@ -59,7 +56,7 @@ public class Bullet extends BaseBullet {
                 break;
         }
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
-            living = false;
+            die();
             return;
         }
         rect.x = x;
