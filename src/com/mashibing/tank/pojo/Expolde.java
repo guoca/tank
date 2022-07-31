@@ -8,8 +8,7 @@ import com.mashibing.tank.util.AudioUtil;
 import java.awt.*;
 
 public class Expolde extends BaseExpolde {
-    public static final int WIDTH = ResMgr.explodeArr[0].getWidth();
-    public static final int HEIGHT = ResMgr.explodeArr[0].getHeight();
+
     private int i = 0;
 
     public Expolde(int x, int y) {

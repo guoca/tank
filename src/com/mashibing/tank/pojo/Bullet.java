@@ -5,15 +5,12 @@ import com.mashibing.tank.TankFrame;
 import com.mashibing.tank.enums.Dir;
 import com.mashibing.tank.enums.Group;
 import com.mashibing.tank.pojo.base.BaseBullet;
-import com.mashibing.tank.singleton.GlobalConfig;
 import com.mashibing.tank.singleton.ResMgr;
 
 import java.awt.*;
 
 public class Bullet extends BaseBullet {
-    private static final int SPEED = GlobalConfig.BULLET_SPEED;
-    public static final int WIDTH = ResMgr.bulletD.getWidth();
-    public static final int HEIGHT = ResMgr.bulletD.getHeight();
+
     private Dir dir;
     private Group group;
     private boolean living = true;
@@ -33,16 +30,16 @@ public class Bullet extends BaseBullet {
         }
         switch (dir) {
             case LEFT:
-                g.drawImage(ResMgr.bulletL, x, y, null);
+                g.drawImage(ResMgr.bulletL_B, x, y, null);
                 break;
             case RIGHT:
-                g.drawImage(ResMgr.bulletR, x, y, null);
+                g.drawImage(ResMgr.bulletR_B, x, y, null);
                 break;
             case UP:
-                g.drawImage(ResMgr.bulletU, x, y, null);
+                g.drawImage(ResMgr.bulletU_B, x, y, null);
                 break;
             case DOWN:
-                g.drawImage(ResMgr.bulletD, x, y, null);
+                g.drawImage(ResMgr.bulletD_B, x, y, null);
                 break;
             default:
                 break;

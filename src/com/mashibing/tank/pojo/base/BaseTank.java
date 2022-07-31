@@ -23,10 +23,11 @@ public abstract class BaseTank extends BaseGameObject {
     protected boolean moving = false;
     protected boolean living = true;
     protected FireStrategy fs;
-    protected Rectangle rect = new Rectangle(x, y, WIDTH, HEIGHT);
+    protected Rectangle rect;
 
     public BaseTank(int x, int y) {
-        super(x, y);
+        super(x, y, WIDTH, HEIGHT);
+        rect = new Rectangle(x, y, WIDTH, HEIGHT);
     }
 
     /**
