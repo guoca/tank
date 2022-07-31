@@ -2,7 +2,7 @@ package com.mashibing.tank.factory;
 
 import com.mashibing.tank.enums.Dir;
 import com.mashibing.tank.enums.Group;
-import com.mashibing.tank.pojo.Bullet;
+import com.mashibing.tank.flyweight.BulletPool;
 import com.mashibing.tank.pojo.Expolde;
 import com.mashibing.tank.pojo.Tank;
 import com.mashibing.tank.pojo.base.BaseBullet;
@@ -20,7 +20,7 @@ public class DefaultFactory extends GameFactory {
 
     @Override
     public BaseBullet createBullet(int x, int y, Dir dir, Group group) {
-        return new Bullet(x, y, dir, group);
+        return BulletPool.getInstance().getBullet(x, y, dir, group);
     }
 
     @Override
