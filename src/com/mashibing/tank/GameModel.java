@@ -1,6 +1,6 @@
 package com.mashibing.tank;
 
-import com.mashibing.tank.cor.ColliderChain;
+import com.mashibing.tank.chain.ColliderChain;
 import com.mashibing.tank.decorator.RectDecorator;
 import com.mashibing.tank.enums.Dir;
 import com.mashibing.tank.enums.Group;
