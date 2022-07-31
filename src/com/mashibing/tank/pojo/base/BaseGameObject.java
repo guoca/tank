@@ -2,8 +2,11 @@ package com.mashibing.tank.pojo.base;
 
 import java.awt.*;
 import java.util.Observable;
+import java.util.UUID;
 
 public abstract class BaseGameObject extends Observable {
+    protected UUID id = UUID.randomUUID();
+    protected  boolean  living = true;
     protected int x, y, width, height;
     protected Rectangle rect;
 
@@ -20,6 +23,14 @@ public abstract class BaseGameObject extends Observable {
     }
 
     public abstract void paint(Graphics g);
+
+    public UUID getId() {
+        return id;
+    }
+
+    public boolean isLiving() {
+        return living;
+    }
 
     public int getX() {
         return x;
@@ -39,5 +50,18 @@ public abstract class BaseGameObject extends Observable {
 
     public Rectangle getRect() {
         return rect;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " {" +
+                "id=" + id +
+                ", living=" + living +
+                ", x=" + x +
+                ", y=" + y +
+                ", width=" + width +
+                ", height=" + height +
+                ", rect=" + rect +
+                '}';
     }
 }
