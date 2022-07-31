@@ -1,4 +1,4 @@
-package com.mashibing.tank.cor;
+package com.mashibing.tank.chain;
 
 import com.mashibing.tank.pojo.base.BaseGameObject;
 
