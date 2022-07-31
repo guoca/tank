@@ -3,6 +3,7 @@ package com.mashibing.tank.pojo.base;
 import com.mashibing.tank.GameModel;
 import com.mashibing.tank.enums.Dir;
 import com.mashibing.tank.enums.Group;
+import com.mashibing.tank.observer.TankHandler;
 import com.mashibing.tank.singleton.GlobalConfig;
 import com.mashibing.tank.singleton.ResMgr;
 import com.mashibing.tank.strategy.FireStrategy;
@@ -21,7 +22,6 @@ public abstract class BaseTank extends BaseGameObject {
     protected Group group;
     protected Dir dir;
     protected boolean moving = false;
-    protected boolean living = true;
     protected FireStrategy fs;
 
     public BaseTank(int x, int y, Dir dir, Group group) {
@@ -42,13 +42,17 @@ public abstract class BaseTank extends BaseGameObject {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        //添加观察者
+        addObserver(new TankHandler());
     }
 
     /**
      * 销毁
      */
     public void die() {
-        this.living = false;
+        GameModel.getInstance().remove(this);
+        setChanged();
+        notifyObservers("我被击中了");
     }
 
 

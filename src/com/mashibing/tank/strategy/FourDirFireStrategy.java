@@ -4,8 +4,6 @@ import com.mashibing.tank.GameModel;
 import com.mashibing.tank.enums.Dir;
 import com.mashibing.tank.enums.Group;
 import com.mashibing.tank.factory.GameFactory;
-import com.mashibing.tank.pojo.Bullet;
-import com.mashibing.tank.pojo.Tank;
 import com.mashibing.tank.pojo.base.BaseBullet;
 import com.mashibing.tank.pojo.base.BaseTank;
 import com.mashibing.tank.singleton.GlobalConfig;

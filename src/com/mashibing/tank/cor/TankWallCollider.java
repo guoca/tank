@@ -1,6 +1,5 @@
 package com.mashibing.tank.cor;
 
-import com.mashibing.tank.pojo.Bullet;
 import com.mashibing.tank.pojo.Tank;
 import com.mashibing.tank.pojo.Wall;
 import com.mashibing.tank.pojo.base.BaseGameObject;

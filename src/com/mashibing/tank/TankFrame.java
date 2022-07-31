@@ -13,7 +13,7 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame {
     public static final int GAME_WIDTH = GlobalConfig.GAME_WIDTH;
     public static final int GAME_HEIGHT = GlobalConfig.GAME_HEIGHT;
-
+    Image offScreenImg = null;
 
     public TankFrame() {
         setTitle("坦克大战");
@@ -29,8 +29,6 @@ public class TankFrame extends Frame {
         addKeyListener(new MyKeyListener());
 
     }
-
-    Image offScreenImg = null;
 
     @Override
     public void update(Graphics g) {

@@ -1,4 +1,3 @@
-
 package com.mashibing.tank.util;
 
 import javax.sound.sampled.*;
@@ -19,24 +18,9 @@ public class AudioUtil {
     private DataLine.Info dataLine_info = null;
 
 
-
-
-    /**
-     * 循环播放
-     */
-    public void loop() {
-        try {
-            while (true) {
-                play();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
     /**
      * 根据文件路名构建音频对象
+     *
      * @param fileName
      */
     public AudioUtil(String fileName) {
@@ -53,6 +37,26 @@ public class AudioUtil {
             //FloatControl volctrl=(FloatControl)sourceDataLine.getControl(FloatControl.Type.MASTER_GAIN);
             //volctrl.setValue(-40);//
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        AudioUtil a = new AudioUtil("audio/explode.wav");
+//        Audio a = new Audio("audio/war1.wav");
+        a.play();
+
+    }
+
+    /**
+     * 循环播放
+     */
+    public void loop() {
+        try {
+            while (true) {
+                play();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -78,20 +82,12 @@ public class AudioUtil {
         }
     }
 
-
     public void close() {
         try {
             audioInputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        AudioUtil a = new AudioUtil("audio/explode.wav");
-//        Audio a = new Audio("audio/war1.wav");
-        a.play();
-
     }
 
 }

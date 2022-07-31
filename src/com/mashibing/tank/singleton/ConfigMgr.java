@@ -9,12 +9,8 @@ import java.util.Properties;
  */
 public class ConfigMgr {
 
-    private static Properties pro = new Properties();
-
-    private ConfigMgr() {
-    }
-
-    private static ConfigMgr configMgr = new ConfigMgr();
+    private static final Properties pro = new Properties();
+    private static final ConfigMgr configMgr = new ConfigMgr();
 
     static {
         try {
@@ -24,6 +20,8 @@ public class ConfigMgr {
         }
     }
 
+    private ConfigMgr() {
+    }
 
     public static ConfigMgr getInstance() {
         return configMgr;

@@ -1,8 +1,9 @@
 package com.mashibing.tank.pojo.base;
 
 import java.awt.*;
+import java.util.Observable;
 
-public abstract class BaseGameObject {
+public abstract class BaseGameObject extends Observable {
     protected int x, y, width, height;
     protected Rectangle rect;
 

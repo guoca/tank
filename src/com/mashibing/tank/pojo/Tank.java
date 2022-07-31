@@ -1,6 +1,5 @@
 package com.mashibing.tank.pojo;
 
-import com.mashibing.tank.GameModel;
 import com.mashibing.tank.TankFrame;
 import com.mashibing.tank.enums.Dir;
 import com.mashibing.tank.enums.Group;
@@ -18,7 +17,6 @@ public class Tank extends BaseTank {
 
     @Override
     public void paint(Graphics g) {
-        if (!living) GameModel.getInstance().remove(this);
         switch (dir) {
             case LEFT:
                 g.drawImage(this.group == Group.BAD ? ResMgr.bTankL : ResMgr.gTankL, x, y, null);

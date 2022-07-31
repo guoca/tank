@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ColliderChain implements Collider {
-    private List<Collider> cList = new ArrayList<>();
+    private final List<Collider> cList = new ArrayList<>();
 
     public ColliderChain() {
         String colliders = GlobalConfig.COLLIDERS;
-        if(colliders != null && !"".equals(colliders)){
+        if (colliders != null && !"".equals(colliders)) {
             String[] collideStrArr = colliders.split(",");
             for (String collideStr : collideStrArr) {
                 try {

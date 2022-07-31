@@ -10,9 +10,6 @@ import java.io.IOException;
  * 资源管理类
  */
 public class ResMgr {
-    private ResMgr() {
-    }
-
     public static BufferedImage gTankL, gTankR, gTankU, gTankD;
     public static BufferedImage bTankL, bTankR, bTankU, bTankD;
     public static BufferedImage bulletL, bulletR, bulletU, bulletD;
@@ -43,5 +40,8 @@ public class ResMgr {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private ResMgr() {
     }
 }

@@ -17,14 +17,24 @@ import java.util.List;
 
 public class GameModel {
 
-    private BaseTank mainTank;
-    private GameFactory gf = new DefaultFactory();
-    ColliderChain cc = new ColliderChain();
-
     private static final GameModel GM = new GameModel();
 
     static {
         GM.init();
+    }
+
+    ColliderChain cc = new ColliderChain();
+    private BaseTank mainTank;
+    private final GameFactory gf = new DefaultFactory();
+    private final List<BaseGameObject> objList = new ArrayList<>();
+
+
+    private GameModel() {
+
+    }
+
+    public static GameModel getInstance() {
+        return GM;
     }
 
     private void init() {
@@ -43,17 +53,6 @@ public class GameModel {
 
     }
 
-
-    private GameModel() {
-
-    }
-
-    public static GameModel getInstance() {
-        return GM;
-    }
-
-    private List<BaseGameObject> objList = new ArrayList<>();
-
     public BaseTank getMainTank() {
         return mainTank;
     }
@@ -62,9 +61,6 @@ public class GameModel {
         return gf;
     }
 
-    public List<BaseGameObject> getObjList() {
-        return objList;
-    }
 
     public void add(BaseGameObject obj) {
         this.objList.add(obj);
