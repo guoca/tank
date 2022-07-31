@@ -17,6 +17,7 @@ public abstract class BaseTank extends BaseGameObject {
     public static final int WIDTH = ResMgr.bTankD.getWidth();
     public static final int HEIGHT = ResMgr.bTankD.getHeight();
     public static final int SPEED = GlobalConfig.TANK_SPEED;
+    protected boolean living = true;
 
     protected int ox, oy;
     protected Group group;
@@ -50,6 +51,7 @@ public abstract class BaseTank extends BaseGameObject {
      * 销毁
      */
     public void die() {
+        this.living = false;
         GameModel.getInstance().remove(this);
         setChanged();
         notifyObservers("我被击中了");
