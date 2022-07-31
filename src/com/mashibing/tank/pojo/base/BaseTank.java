@@ -12,22 +12,36 @@ import java.util.Random;
 
 public abstract class BaseTank extends BaseGameObject {
 
-    protected int ox, oy;
+    public static final Random RANDOM = new Random();
     public static final int WIDTH = ResMgr.bTankD.getWidth();
     public static final int HEIGHT = ResMgr.bTankD.getHeight();
-    public static final Random RANDOM = new Random();
+    public static final int SPEED = GlobalConfig.TANK_SPEED;
 
-    protected static final int SPEED = GlobalConfig.TANK_SPEED;
-    protected Group group = Group.BAD;
-    protected Dir dir = Dir.DOWN;
+    protected int ox, oy;
+    protected Group group;
+    protected Dir dir;
     protected boolean moving = false;
     protected boolean living = true;
     protected FireStrategy fs;
-    protected Rectangle rect;
 
-    public BaseTank(int x, int y) {
+    public BaseTank(int x, int y, Dir dir, Group group) {
         super(x, y, WIDTH, HEIGHT);
+        this.dir = dir;
+        this.group = group;
         rect = new Rectangle(x, y, WIDTH, HEIGHT);
+        String fsName = GlobalConfig.BAD_TANK_FIRE_STRATEGY;
+        if (this.group == Group.GOOD) {
+            fsName = GlobalConfig.GOOD_TANK_FIRE_STRATEGY;
+        }
+        try {
+            this.fs = (FireStrategy) Class.forName(fsName).newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -37,14 +51,6 @@ public abstract class BaseTank extends BaseGameObject {
         this.living = false;
     }
 
-    /**
-     * 获取坦克坐标
-     *
-     * @return
-     */
-    public Rectangle getRect() {
-        return this.rect;
-    }
 
     /**
      * 开火
@@ -54,33 +60,12 @@ public abstract class BaseTank extends BaseGameObject {
     }
 
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
     public Group getGroup() {
         return group;
     }
 
     public Dir getDir() {
         return dir;
-    }
-
-    public boolean isMoving() {
-        return moving;
-    }
-
-    public boolean isLiving() {
-        return living;
-    }
-
-
-    public FireStrategy getFs() {
-        return fs;
     }
 
     public void setDir(Dir dir) {
@@ -103,6 +88,9 @@ public abstract class BaseTank extends BaseGameObject {
         dir = Dir.values()[i];
     }
 
+    /**
+     * 回退
+     */
     public void back() {
         x = ox;
         y = oy;

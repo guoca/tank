@@ -5,9 +5,7 @@ import com.mashibing.tank.TankFrame;
 import com.mashibing.tank.enums.Dir;
 import com.mashibing.tank.enums.Group;
 import com.mashibing.tank.pojo.base.BaseTank;
-import com.mashibing.tank.singleton.GlobalConfig;
 import com.mashibing.tank.singleton.ResMgr;
-import com.mashibing.tank.strategy.FireStrategy;
 
 import java.awt.*;
 
@@ -15,28 +13,12 @@ public class Tank extends BaseTank {
 
 
     public Tank(int x, int y, Dir dir, Group group) {
-        super(x,y);
-        super.dir = dir;
-        this.group = group;
-        String fsName = GlobalConfig.BAD_TANK_FIRE_STRATEGY;
-        if (this.group == Group.GOOD) {
-            fsName = GlobalConfig.GOOD_TANK_FIRE_STRATEGY;
-        }
-        try {
-            this.fs = (FireStrategy) Class.forName(fsName).newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        GameModel.getInstance().add(this);
+        super(x, y, dir, group);
     }
 
-
+    @Override
     public void paint(Graphics g) {
-        if (!living) GameModel.getInstance().getObjList().remove(this);
+        if (!living) GameModel.getInstance().remove(this);
         switch (dir) {
             case LEFT:
                 g.drawImage(this.group == Group.BAD ? ResMgr.bTankL : ResMgr.gTankL, x, y, null);
@@ -57,11 +39,13 @@ public class Tank extends BaseTank {
         move();
     }
 
-
+    /**
+     *
+     */
     private void move() {
         ox = x;
         oy = y;
-        if (!isMoving() && group == Group.GOOD) {
+        if (!moving && group == Group.GOOD) {
             return;
         }
 

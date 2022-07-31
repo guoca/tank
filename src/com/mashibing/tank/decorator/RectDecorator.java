@@ -13,12 +13,15 @@ public class RectDecorator extends BgoDecorator {
     }
 
     @Override
-    public void paint(Graphics g) {
-        x = bgo.getX();
-        y = bgo.getY();
-        Color c = g.getColor();
-        g.setColor(Color.YELLOW);
-        g.drawRect(x, y, width + 5, height + 5);
-        g.setColor(c);
+    protected void paint(Graphics g, BaseGameObject bgo) {
+        Graphics2D g2d = (Graphics2D) g;
+        Color c = g2d.getColor();
+        g2d.setColor(Color.YELLOW);
+        // 设置线条宽度
+        g2d.setStroke(new BasicStroke(5));
+        int borderWidth = 5;
+        g2d.drawRect(x - borderWidth, y - borderWidth, width + borderWidth * 2, height + borderWidth * 2);
+        g2d.setColor(c);
     }
+
 }

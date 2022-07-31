@@ -19,5 +19,10 @@ public abstract class BgoDecorator extends BaseGameObject {
     @Override
     public void paint(Graphics g) {
         bgo.paint(g);
+        x = bgo.getX();
+        y = bgo.getY();
+        paint(g,bgo);
     }
+
+    protected abstract void paint(Graphics g, BaseGameObject bgo);
 }

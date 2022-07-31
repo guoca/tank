@@ -5,23 +5,16 @@ import com.mashibing.tank.TankFrame;
 import com.mashibing.tank.enums.Dir;
 import com.mashibing.tank.enums.Group;
 import com.mashibing.tank.pojo.base.BaseBullet;
+import com.mashibing.tank.singleton.GlobalConfig;
 import com.mashibing.tank.singleton.ResMgr;
 
 import java.awt.*;
 
 public class Bullet extends BaseBullet {
 
-    private Dir dir;
-    private Group group;
-    private boolean living = true;
-    private Rectangle rect;
 
     public Bullet(int x, int y, Dir dir, Group group) {
-        super(x,y);
-        this.dir = dir;
-        this.group = group;
-        rect = new Rectangle(x, y, WIDTH, HEIGHT);
-        GameModel.getInstance().add(this);
+        super(x, y, dir, group);
     }
 
     public void paint(Graphics g) {
@@ -48,6 +41,7 @@ public class Bullet extends BaseBullet {
     }
 
     private void move() {
+        final int SPEED = GlobalConfig.BULLET_SPEED;
         switch (dir) {
             case LEFT:
                 x -= SPEED;
@@ -73,22 +67,5 @@ public class Bullet extends BaseBullet {
     }
 
 
-
-    /**
-     * 获取子弹坐标
-     *
-     * @return
-     */
-    public Rectangle getRect() {
-        return this.rect;
-    }
-
-    public void die() {
-        this.living = false;
-    }
-
-    public Group getGroup() {
-        return group;
-    }
 }
 

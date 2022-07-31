@@ -1,6 +1,7 @@
 package com.mashibing.tank;
 
 import com.mashibing.tank.cor.ColliderChain;
+import com.mashibing.tank.decorator.RectDecorator;
 import com.mashibing.tank.enums.Dir;
 import com.mashibing.tank.enums.Group;
 import com.mashibing.tank.factory.DefaultFactory;
@@ -28,17 +29,17 @@ public class GameModel {
 
     private void init() {
         //初始化主坦克
-        mainTank = gf.createTank(200, 400, Dir.DOWN, Group.GOOD);
+        mainTank = gf.createTank(200, 400, Dir.UP, Group.GOOD);
         int tankCount = GlobalConfig.INIT_TANK_COUNT;
         //初始化敌方坦克
         for (int i = 0; i < tankCount; i++) {
-            gf.createTank(50 + i * 80, 200, Dir.DOWN, Group.BAD);
+            GM.add(gf.createTank(50 + i * 80, 200, Dir.DOWN, Group.BAD));
         }
         //初始化墙体
-        new Wall(150, 150, 200, 50);
-        new Wall(550, 150, 200, 50);
-        new Wall(300, 300, 50, 200);
-        new Wall(550, 300, 50, 200);
+        GM.add(new RectDecorator(new Wall(150, 150, 200, 50)));
+        GM.add(new Wall(550, 150, 200, 50));
+        GM.add(new Wall(300, 300, 50, 200));
+        GM.add(new Wall(550, 300, 50, 200));
 
     }
 
