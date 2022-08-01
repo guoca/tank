@@ -8,19 +8,21 @@ import com.mashibing.tank.pojo.Tank;
 import com.mashibing.tank.pojo.base.BaseBullet;
 import com.mashibing.tank.pojo.base.BaseExpolde;
 import com.mashibing.tank.pojo.base.BaseTank;
+import com.mashibing.tank.proxy.NoOpInterceptor;
 import com.mashibing.tank.proxy.TimeIntercepter;
 import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.CallbackFilter;
 import net.sf.cglib.proxy.Enhancer;
-import net.sf.cglib.proxy.NoOp;
+
+import java.io.Serializable;
 
 /**
  * 默认工厂
  */
-public class DefaultFactory extends GameFactory {
+public class DefaultFactory extends GameFactory implements Serializable {
 
     // 通知
-    static Callback[] advices = new Callback[] { NoOp.INSTANCE/*默认什么都不做*/, new TimeIntercepter() };
+    static transient Callback[] advices = new Callback[] { new NoOpInterceptor()/*默认什么都不做*/, new TimeIntercepter() };
 
     static CallbackFilter pointCut = method -> {
         switch (method.getName()) {
@@ -33,6 +35,7 @@ public class DefaultFactory extends GameFactory {
     public BaseTank createTank(int x, int y, Dir dir, Group group) {
         Enhancer e = new Enhancer();
         e.setSuperclass(Tank.class);
+        e.setInterfaces(new Class[]{Serializable.class});
 //        e.setCallback(new TimeIntercepter());
         e.setCallbacks(advices);
         e.setCallbackFilter(pointCut);

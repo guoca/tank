@@ -1,10 +1,11 @@
 package com.mashibing.tank.pojo.base;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.UUID;
 
-public abstract class BaseGameObject extends Observable {
+public abstract class BaseGameObject extends Observable implements Serializable {
     protected UUID id = UUID.randomUUID();
     protected  boolean  living = true;
     protected int x, y, width, height;

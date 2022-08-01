@@ -24,9 +24,9 @@ public class GameModel {
     }
 
     ColliderChain cc = new ColliderChain();
-    private BaseTank mainTank;
     private final GameFactory gf = new DefaultFactory();
-    private final List<BaseGameObject> objList = new ArrayList<>();
+    private BaseTank mainTank;
+    private List<BaseGameObject> objList = new ArrayList<>();
 
 
     private GameModel() {
@@ -53,9 +53,7 @@ public class GameModel {
 
     }
 
-    public BaseTank getMainTank() {
-        return mainTank;
-    }
+
 
     public GameFactory getGf() {
         return gf;
@@ -70,6 +68,21 @@ public class GameModel {
         this.objList.remove(obj);
     }
 
+    public BaseTank getMainTank() {
+        return mainTank;
+    }
+
+    public void setMainTank(BaseTank mainTank) {
+        this.mainTank = mainTank;
+    }
+
+    public List<BaseGameObject> getObjList() {
+        return objList;
+    }
+
+    public void setObjList(List<BaseGameObject> objList) {
+        this.objList = objList;
+    }
 
     public void paint(Graphics g) {
         Color c = g.getColor();

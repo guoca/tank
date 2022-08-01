@@ -1,6 +1,7 @@
 package com.mashibing.tank;
 
 import com.mashibing.tank.enums.Dir;
+import com.mashibing.tank.pojo.base.BaseGameObject;
 import com.mashibing.tank.pojo.base.BaseTank;
 import com.mashibing.tank.singleton.GlobalConfig;
 
@@ -9,6 +10,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.*;
+import java.util.List;
 
 public class TankFrame extends Frame {
     public static final int GAME_WIDTH = GlobalConfig.GAME_WIDTH;
@@ -111,10 +114,47 @@ public class TankFrame extends Frame {
                 case KeyEvent.VK_SPACE:
                     GameModel.getInstance().getMainTank().fire();
                     break;
+                case KeyEvent.VK_S:
+                    save();
+                case KeyEvent.VK_L:
+                    load();
                 default:
                     break;
             }
             setMainTankDir();
+        }
+
+        /**
+         * 读档
+         */
+        private void load() {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("D:/game.data")))) {
+                BaseTank mainTank = (BaseTank) ois.readObject();
+                List<BaseGameObject> objList = (List<BaseGameObject>) ois.readObject();
+                GameModel gm = GameModel.getInstance();
+                gm.setMainTank(mainTank);
+                gm.setObjList(objList);
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+        /**
+         * 存档
+         */
+        private void save() {
+            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("D:/game.data")))) {
+                GameModel gm = GameModel.getInstance();
+                BaseTank mainTank = gm.getMainTank();
+                List<BaseGameObject> objList = gm.getObjList();
+                oos.writeObject(mainTank);
+                oos.writeObject(objList);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }
