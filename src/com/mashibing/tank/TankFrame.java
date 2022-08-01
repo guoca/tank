@@ -118,10 +118,26 @@ public class TankFrame extends Frame {
                     save();
                 case KeyEvent.VK_L:
                     load();
+                case KeyEvent.VK_P:
+                    suspend();
                 default:
                     break;
             }
             setMainTankDir();
+        }
+
+        /**
+         * 暂停/继续
+         */
+        private void suspend() {
+            GameModel gm = GameModel.getInstance();
+            BaseTank mainTank = gm.getMainTank();
+            mainTank.setSuspending(!mainTank.isSuspending());
+            List<BaseGameObject> objList = gm.getObjList();
+            for (int i = 0; i < objList.size(); i++) {
+                BaseGameObject bgo = objList.get(i);
+                bgo.setSuspending(!bgo.isSuspending());
+            }
         }
 
         /**

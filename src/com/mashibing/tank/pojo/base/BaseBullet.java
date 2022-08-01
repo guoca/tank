@@ -3,6 +3,7 @@ package com.mashibing.tank.pojo.base;
 import com.mashibing.tank.GameModel;
 import com.mashibing.tank.enums.Dir;
 import com.mashibing.tank.enums.Group;
+import com.mashibing.tank.singleton.GlobalConfig;
 import com.mashibing.tank.singleton.ResMgr;
 
 import java.awt.*;
@@ -11,7 +12,7 @@ public abstract class BaseBullet extends BaseGameObject {
 
     protected Dir dir;
     protected Group group;
-
+    public static final int SPEED = GlobalConfig.TANK_SPEED;
     public BaseBullet(int x, int y, Dir dir, Group group) {
         super(x, y, ResMgr.bulletD.getWidth(), ResMgr.bulletD.getHeight());
         this.dir = dir;

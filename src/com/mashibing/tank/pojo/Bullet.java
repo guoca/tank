@@ -38,7 +38,7 @@ public class Bullet extends BaseBullet {
     }
 
     private void move() {
-        final int SPEED = GlobalConfig.BULLET_SPEED;
+        if(suspending) return;
         switch (dir) {
             case LEFT:
                 x -= SPEED;

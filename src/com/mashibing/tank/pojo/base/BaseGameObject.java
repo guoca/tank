@@ -8,6 +8,7 @@ import java.util.UUID;
 public abstract class BaseGameObject extends Observable implements Serializable {
     protected UUID id = UUID.randomUUID();
     protected  boolean  living = true;
+    protected  boolean  suspending = false;
     protected int x, y, width, height;
     protected Rectangle rect;
 
@@ -51,6 +52,14 @@ public abstract class BaseGameObject extends Observable implements Serializable 
 
     public Rectangle getRect() {
         return rect;
+    }
+
+    public boolean isSuspending() {
+        return suspending;
+    }
+
+    public void setSuspending(boolean suspending) {
+        this.suspending = suspending;
     }
 
     @Override

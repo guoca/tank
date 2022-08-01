@@ -45,11 +45,12 @@ public class Tank extends BaseTank {
      * 移动
      */
     public void move() {
-        ox = x;
-        oy = y;
+        if(suspending) return;
         if (!moving && group == Group.GOOD) {
             return;
         }
+        ox = x;
+        oy = y;
 
         switch (dir) {
             case LEFT:
