@@ -8,14 +8,36 @@ import com.mashibing.tank.pojo.Tank;
 import com.mashibing.tank.pojo.base.BaseBullet;
 import com.mashibing.tank.pojo.base.BaseExpolde;
 import com.mashibing.tank.pojo.base.BaseTank;
+import com.mashibing.tank.proxy.TimeIntercepter;
+import net.sf.cglib.proxy.Callback;
+import net.sf.cglib.proxy.CallbackFilter;
+import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.NoOp;
 
 /**
  * 默认工厂
  */
 public class DefaultFactory extends GameFactory {
+
+    // 通知
+    static Callback[] advices = new Callback[] { NoOp.INSTANCE/*默认*/, new TimeIntercepter() };
+
+    static CallbackFilter pointCut = method -> {
+        switch (method.getName()) {
+            case "die" : return 1; // die() 方法植入通知
+            default: return 0; // 其他方法不添加通知
+        }
+    };
+
     @Override
     public BaseTank createTank(int x, int y, Dir dir, Group group) {
-        return new Tank(x, y, dir, group);
+        Enhancer e = new Enhancer();
+        e.setSuperclass(Tank.class);
+//        e.setCallback(new TimeIntercepter());
+        e.setCallbacks(advices);
+        e.setCallbackFilter(pointCut);
+        BaseTank t = (BaseTank) e.create(new Class[]{int.class, int.class, Dir.class, Group.class}, new Object[]{x, y, dir, group});
+        return t;
     }
 
     @Override

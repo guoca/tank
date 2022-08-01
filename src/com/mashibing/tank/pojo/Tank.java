@@ -4,9 +4,12 @@ import com.mashibing.tank.TankFrame;
 import com.mashibing.tank.enums.Dir;
 import com.mashibing.tank.enums.Group;
 import com.mashibing.tank.pojo.base.BaseTank;
+import com.mashibing.tank.pojo.base.Movable;
+import com.mashibing.tank.proxy.LogHandler;
 import com.mashibing.tank.singleton.ResMgr;
 
 import java.awt.*;
+import java.lang.reflect.Proxy;
 
 public class Tank extends BaseTank {
 
@@ -33,14 +36,15 @@ public class Tank extends BaseTank {
             default:
                 break;
         }
-
-        move();
+        //使用jdk动态代理移动方法
+        Movable m = (Movable) Proxy.newProxyInstance(this.getClass().getClassLoader(), new Class[]{Movable.class}, new LogHandler(this));
+        m.move();
     }
 
     /**
-     *
+     * 移动
      */
-    private void move() {
+    public void move() {
         ox = x;
         oy = y;
         if (!moving && group == Group.GOOD) {

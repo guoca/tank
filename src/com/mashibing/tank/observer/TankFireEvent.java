@@ -8,10 +8,6 @@ import java.util.EventObject;
 public class TankFireEvent extends EventObject {
     private Object arg;
 
-    public TankFireEvent(Object source) {
-        super(source);
-    }
-
     public TankFireEvent(Object source, Object arg) {
         super(source);
         this.arg = arg;
