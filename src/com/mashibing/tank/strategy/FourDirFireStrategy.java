@@ -13,6 +13,7 @@ public class FourDirFireStrategy implements FireStrategy {
 
     @Override
     public void fire(BaseTank t) {
+        System.out.println("四面开火策略*****");
         int bx = t.getX() + GlobalConfig.TANK_WIDTH / 2 - GlobalConfig.BULLET_WIDTH / 2;
         int by = t.getY() + GlobalConfig.TANK_HEIGHT / 2 - GlobalConfig.BULLET_HEIGHT / 2;
         Dir[] dirs = Dir.values();

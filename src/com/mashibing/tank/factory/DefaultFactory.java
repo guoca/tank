@@ -20,7 +20,7 @@ import net.sf.cglib.proxy.NoOp;
 public class DefaultFactory extends GameFactory {
 
     // 通知
-    static Callback[] advices = new Callback[] { NoOp.INSTANCE/*默认*/, new TimeIntercepter() };
+    static Callback[] advices = new Callback[] { NoOp.INSTANCE/*默认什么都不做*/, new TimeIntercepter() };
 
     static CallbackFilter pointCut = method -> {
         switch (method.getName()) {
@@ -47,6 +47,7 @@ public class DefaultFactory extends GameFactory {
 
     @Override
     public BaseExpolde createExpolde(int x, int y) {
+        System.out.println("************抽象工厂模式创建爆炸对象************");
         return new Expolde(x, y);
     }
 }

@@ -53,8 +53,9 @@ public abstract class BaseTank extends BaseGameObject implements Movable{
     public void die() {
         this.living = false;
         GameModel.getInstance().remove(this);
+        System.out.println("我是被观察者，我被击毙了，临死前通知观察者***********************************");
         setChanged();
-        notifyObservers("我被击中了");
+        notifyObservers("我被击中了，要死了……");
     }
 
 

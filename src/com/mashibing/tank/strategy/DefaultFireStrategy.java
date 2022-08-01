@@ -10,6 +10,7 @@ import com.mashibing.tank.util.AudioUtil;
 public class DefaultFireStrategy implements FireStrategy {
     @Override
     public void fire(BaseTank t) {
+        System.out.println("默认开火策略*****");
         int bx = t.getX() + GlobalConfig.TANK_WIDTH / 2 - GlobalConfig.BULLET_WIDTH / 2;
         int by = t.getY() + GlobalConfig.TANK_HEIGHT / 2 - GlobalConfig.BULLET_HEIGHT / 2;
         GameModel gm = GameModel.getInstance();

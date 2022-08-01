@@ -31,6 +31,7 @@ public class BulletPool {
 
 
     public BaseBullet getBullet(int x, int y, Dir dir, Group group) {
+        System.out.println("享元模式获取子弹，子弹池大小："+bList.size());
         for (int i = 0; i < bList.size(); i++) {
             BaseBullet b = bList.get(i);
             synchronized (b) {

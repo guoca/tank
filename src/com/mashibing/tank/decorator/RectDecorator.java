@@ -14,6 +14,7 @@ public class RectDecorator extends BgoDecorator {
 
     @Override
     protected void paint(Graphics g, BaseGameObject bgo) {
+        System.out.println("装饰者模式：增加矩形边框");
         Graphics2D g2d = (Graphics2D) g;
         Color c = g2d.getColor();
         g2d.setColor(Color.YELLOW);
