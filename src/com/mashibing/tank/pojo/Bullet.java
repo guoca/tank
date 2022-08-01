@@ -37,7 +37,7 @@ public class Bullet extends BaseBullet {
         move();
     }
 
-    private void move() {
+    public void move() {
         if(suspending) return;
         switch (dir) {
             case LEFT:
@@ -59,8 +59,7 @@ public class Bullet extends BaseBullet {
             die();
             return;
         }
-        rect.x = x;
-        rect.y = y;
+        rect.setLocation(x,y);
     }
 
 

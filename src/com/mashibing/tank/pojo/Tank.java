@@ -71,8 +71,7 @@ public class Tank extends BaseTank {
         if (this.group == Group.BAD && RANDOM.nextInt(100) > 95) fire();
         if (this.group == Group.BAD && RANDOM.nextInt(100) > 95) randomChangeDir();
         boundsCheck();
-        rect.x = x;
-        rect.y = y;
+        rect.setLocation(x,y);
     }
 
     /**

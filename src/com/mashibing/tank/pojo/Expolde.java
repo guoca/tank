@@ -20,6 +20,7 @@ public class Expolde extends BaseExpolde {
 
     @Override
     public void paint(Graphics g) {
+        if(suspending) return;
         g.drawImage(ResMgr.explodeArr[i++], x, y, null);
         if (i >= ResMgr.explodeArr.length) GameModel.getInstance().remove(this);
     }

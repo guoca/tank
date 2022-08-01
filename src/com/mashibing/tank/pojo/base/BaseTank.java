@@ -11,7 +11,7 @@ import com.mashibing.tank.strategy.FireStrategy;
 import java.awt.*;
 import java.util.Random;
 
-public abstract class BaseTank extends BaseGameObject implements Movable{
+public abstract class BaseTank extends BaseGameObject implements Movable {
 
     public static final Random RANDOM = new Random();
     public static final int WIDTH = ResMgr.bTankD.getWidth();

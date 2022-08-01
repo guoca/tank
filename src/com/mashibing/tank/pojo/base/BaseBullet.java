@@ -8,11 +8,12 @@ import com.mashibing.tank.singleton.ResMgr;
 
 import java.awt.*;
 
-public abstract class BaseBullet extends BaseGameObject {
+public abstract class BaseBullet extends BaseGameObject implements Movable {
 
     protected Dir dir;
     protected Group group;
     public static final int SPEED = GlobalConfig.TANK_SPEED;
+
     public BaseBullet(int x, int y, Dir dir, Group group) {
         super(x, y, ResMgr.bulletD.getWidth(), ResMgr.bulletD.getHeight());
         this.dir = dir;
