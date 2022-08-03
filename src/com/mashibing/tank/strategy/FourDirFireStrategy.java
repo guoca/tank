@@ -11,6 +11,9 @@ import com.mashibing.tank.util.AudioUtil;
 
 public class FourDirFireStrategy implements FireStrategy {
 
+    FourDirFireStrategy() {
+    }
+
     @Override
     public void fire(BaseTank t) {
         System.out.println("四面开火策略*****");

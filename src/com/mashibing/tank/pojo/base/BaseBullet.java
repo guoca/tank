@@ -12,7 +12,7 @@ public abstract class BaseBullet extends BaseGameObject implements Movable {
 
     protected Dir dir;
     protected Group group;
-    public static final int SPEED = GlobalConfig.TANK_SPEED;
+    public static final int SPEED = GlobalConfig.BULLET_SPEED;
 
     public BaseBullet(int x, int y, Dir dir, Group group) {
         super(x, y, ResMgr.bulletD.getWidth(), ResMgr.bulletD.getHeight());

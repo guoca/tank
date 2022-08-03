@@ -8,6 +8,10 @@ import com.mashibing.tank.singleton.GlobalConfig;
 import com.mashibing.tank.util.AudioUtil;
 
 public class DefaultFireStrategy implements FireStrategy {
+
+    DefaultFireStrategy() {
+    }
+
     @Override
     public void fire(BaseTank t) {
         System.out.println("默认开火策略*****");

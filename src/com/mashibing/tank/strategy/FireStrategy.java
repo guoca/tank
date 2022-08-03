@@ -2,11 +2,9 @@ package com.mashibing.tank.strategy;
 
 import com.mashibing.tank.pojo.base.BaseTank;
 
-import java.io.Serializable;
-
 /**
  * 开火策略
  */
-public interface FireStrategy extends Serializable {
+public interface FireStrategy {
     void fire(BaseTank t);
 }

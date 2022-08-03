@@ -4,6 +4,8 @@ import com.mashibing.tank.enums.Dir;
 import com.mashibing.tank.pojo.base.BaseGameObject;
 import com.mashibing.tank.pojo.base.BaseTank;
 import com.mashibing.tank.singleton.GlobalConfig;
+import com.mashibing.tank.strategy.FireContext;
+import com.mashibing.tank.strategy.FireStrategyEnum;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -112,7 +114,10 @@ public class TankFrame extends Frame {
                     bD = true;
                     break;
                 case KeyEvent.VK_SPACE:
-                    GameModel.getInstance().getMainTank().fire();
+                    FireContext.getInstance().fire(GameModel.getInstance().getMainTank(), FireStrategyEnum.DEFAULT);
+                    break;
+                case KeyEvent.VK_CONTROL:
+                    FireContext.getInstance().fire(GameModel.getInstance().getMainTank(), FireStrategyEnum.FOUR_DIR_FIRE);
                     break;
                 case KeyEvent.VK_S:
                     save();
